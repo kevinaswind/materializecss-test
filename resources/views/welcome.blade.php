@@ -11,16 +11,16 @@
 
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="container p-40 mt-40 z-depth-2">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}">{{ __('Login') }}</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
                     @endauth
                 </div>
@@ -28,39 +28,29 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    Laravel {{ __('auth.failed') }}
                 </div>
 
                 <h1>
-                    Language Test
+                    {{ \App\Homepage::find(1)->title }}
                 </h1>
 
-                <p class="flow-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolores, eaque est illum laboriosam necessitatibus nemo tempora voluptate! Deserunt id illo in maiores nesciunt qui repudiandae tempora? Adipisci facilis, voluptas?
-                </p>
+                <div>
+                    {!! \App\Homepage::find(1)->content !!}
+                </div>
+
+                <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                   <h2>{{ strtoupper(app()->getLocale()) }}</h2>
+                </a>
 
                 <!-- Dropdown Trigger -->
                 <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Drop Me!</a>
 
                 <!-- Dropdown Structure -->
                 <ul id='dropdown1' class='dropdown-content'>
-                    <li><a href="#!">one</a></li>
-                    <li><a href="#!">two</a></li>
-                    <li class="divider" tabindex="-1"></li>
-                    <li><a href="#!">three</a></li>
-                    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+                    @foreach(config('app.languages') as $langLocale => $langName)
+                        <li><a href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }} ({{ $langName }})</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>

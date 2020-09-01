@@ -1,7 +1,11 @@
-html:lang(en) h1{
-    font-family: Barlow, sans-serif;
+html:lang(en) {
+    body{
+        font-family: Barlow, sans-serif;
+    }
 }
 
-html:lang(zh-Hans) h1{
-    font-family: Alegreya, sans-serif;
+html:lang(zh-CN) {
+    body{
+        font-family: "Noto Sans SC", sans-serif;
+    }
 }

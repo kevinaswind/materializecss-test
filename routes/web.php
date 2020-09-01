@@ -14,5 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home-locale', app()->getLocale());
+})->name('home');
+
+Route::group(['prefix' => '{locale}', 'where' => ['locale' => '^[a-z]{2}_[A-Z]{2}$']], function () {
+    Route::get('/', 'PageController@index')->name('home-locale');
+
+//    Route::get('article/{id}', 'HomeController@article')->name('article');
 });
+
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
